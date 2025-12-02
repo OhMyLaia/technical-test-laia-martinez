@@ -21,7 +21,7 @@ Antes de pensar en la solución técnica, realiza una breve investigación sobre
 
 Debes entregar:
 
-- Las referencias que encontraste (capturas, enlaces, etc.)
+- Las referencias que encontraste - si hay alguna.
 - Qué enfoque UI/UX te pareció mejor  
 - Por qué elegiste ese enfoque
 
@@ -32,9 +32,10 @@ Debes entregar:
 Explica cómo funcionaría el sistema de favoritos a nivel teórico:
 
 - **Estructura de datos**: ¿Qué información se almacena? ¿En qué formato?
-- **Persistencia**: ¿Cómo se guardan los favoritos en base de datos? 
-- **Lectura/Escritura**: ¿Cómo se parsean y actualizan los datos?
-- **Estados**: ¿Qué estados debe manejar la aplicación? (vacío, con favoritos, errores, etc.)
+- **Persistencia**: ¿Cómo se guardan los favoritos en DB?
+- **API Design**: ¿Qué endpoints necesitas? ¿Qué métodos HTTP?
+- **Lectura/Escritura**: ¿Cómo se comunican frontend y backend?
+- **Estados**: ¿Qué estados debe manejar la aplicación? (vacío, cargando, con favoritos, errores, etc.)
 - **Sincronización**: ¿Cómo se mantiene sincronizado el estado entre componentes?
 
 Define tu propia arquitectura y justifica tus decisiones.
@@ -43,17 +44,20 @@ Define tu propia arquitectura y justifica tus decisiones.
 
 ## 🧩 3. Implementación del MVP
 
-Implementa la funcionalidad básica de favoritos usando **localStorage**, ya que en este ejemplo no tenemos DB:
+Implementa la funcionalidad básica de favoritos usando **backend in-memory**:
 
 ### Requisitos obligatorios:
-- ✅ **Añadir** un comercio a favoritos
-- ✅ **Eliminar** un comercio de favoritos
-- ✅ Indicador visual del estado (favorito o no)
+- ✅ **Backend**: Endpoints para añadir/eliminar favoritos (almacenamiento in-memory)
+- ✅ **Frontend**: Llamadas a la API para gestionar favoritos
+- ✅ **UI**: Indicador visual del estado (favorito o no)
 
 ### No es necesario:
+- Autenticación de usuarios (puedes usar un ID de sesión simple)
+- Persistencia en base de datos real
 - Ver una lista completa de favoritos
 - Filtrar por favoritos
-- Sincronización con backend
+
+**Nota**: Los favoritos se almacenarán en memoria del servidor (se perderán al reiniciar), pero esto es suficiente para demostrar una arquitectura full-stack.
 
 Queremos ver cómo implementas tu diseño teórico en código funcional.
 
