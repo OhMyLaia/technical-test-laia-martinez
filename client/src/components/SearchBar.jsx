@@ -13,8 +13,6 @@ function SearchBar({ onSearch }) {
         }
     };
 
-
-
     return (
         <div className="search-bar-container">
             <div className="search-input-wrapper">

@@ -1,15 +1,6 @@
 import { MapContainer as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
-import { useEffect } from 'react';
 import { useFavourites } from "../context/FavouritesContext";
-
-// Fix for default marker icons in React-Leaflet
-// delete L.Icon.Default.prototype._getIconUrl;
-// L.Icon.Default.mergeOptions({
-//     iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
-//     iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
-//     shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
-// });
 
 const defaultIcon = new L.Icon({
     iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',

@@ -6,7 +6,7 @@ const cors = require('cors');
 app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
 
-// to simulate latency and see the loading state!
+// IMPORTANT: to simulate latency and see the loading state!!
 app.use((req, res, next) => {
     setTimeout(next, 800);
 });
@@ -63,10 +63,15 @@ app.get('/api/businesses', (req, res) => {
 });
 
 
+
+
+
+// Api endpoint to get favs
 app.get('/api/favorites', (req, res) => {
     res.json(favouriteIds);
 });
 
+// Api endpoint to create favs and send to DDBB
 app.post('/api/favorites/:id', (req, res) => {
     const id = parseInt(req.params.id);
     
@@ -82,7 +87,7 @@ app.post('/api/favorites/:id', (req, res) => {
     res.status(200).json({ message: "Added to favorites", id, isFavourite: true });
 });
 
-
+// Api endpoint to delete favs from DDBB
 app.delete('/api/favorites/:id', (req, res) => {
     const id = parseInt(req.params.id);
     
@@ -90,6 +95,10 @@ app.delete('/api/favorites/:id', (req, res) => {
 
     res.status(200).json({ message: "Removed from favorites", id, isFavourite: false });
 });
+
+
+
+
 
 const PORT = 3001;
 app.listen(PORT, () => {

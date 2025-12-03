@@ -88,7 +88,7 @@ function BusinessModal({ business, onClose }) {
                     <button
                         onClick={handleToggle}
                         disabled={loading}
-                        style={{...styles.button, opacity: loading ? 0.7 : 1}}
+                        style={{...styles.button, opacity: loading ? 0.5 : 1}}
                     > 
                         {loading ? "Loading..." : (isFav ? "Delete Fav" : "Add Fav")}
                     </button>
