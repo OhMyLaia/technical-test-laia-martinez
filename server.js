@@ -52,6 +52,40 @@ app.get('/api/businesses', (req, res) => {
     res.json(results);
 });
 
+app.post('/api/businesses', (req, res) => {
+
+    try {
+
+        const { name, lat, lng, category, description, address } = req.body;
+
+        if (!name || !lat || !lng) {
+            return res.status(400).json({ error: "Mandatory key missing" });
+        }
+    
+        const newId = businesses.length > 0 ? businesses[businesses.length - 1].id + 1 : 1;
+    
+        const newBusiness = {
+            id: newId,
+            name,
+            lat,
+            lng,
+            category,
+            description,
+            address
+        };
+    
+        businesses.push(newBusiness);
+    
+        res.status(201).json(newBusiness);
+
+    } catch (error) {
+        console.error("Error creating business:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+
+
 const PORT = 3001;
 app.listen(PORT, () => {
     console.log(`Technical test server running on http://localhost:${PORT}`);
