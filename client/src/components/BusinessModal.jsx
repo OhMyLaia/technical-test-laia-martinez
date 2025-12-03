@@ -3,11 +3,33 @@ import { useState } from "react";
 function BusinessModal({ business, onClose }) {
 
     const [isFav, setIsFav] = useState(false);
+    const [loading, setLoading] = useState();
 
 
-    const toggleFav = () => {
-        setIsFav(prev => !prev);
+
+
+    const toggleFav = async () => {
+        const method = isFav ? 'DELETE' : 'POST';
+        setLoading(true);
+        
+        try {
+            const response = await fetch(`http://localhost:3001/api/favorites/${business.id}`, {
+                method: method,
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            if (response.ok) {
+                setIsFav(!isFav);
+            }
+
+        } catch (error) {
+            console.error("Error adding favourite:", error);
+            setLoading(false);
+        }
+        setLoading(false);
     }
+
+    
 
     const styles = {
         overlay: {
@@ -79,7 +101,9 @@ function BusinessModal({ business, onClose }) {
                 <div>
                     <button
                     onClick={toggleFav}
-                    style={styles.button}> {isFav === true ? "Remove Fav" : "Add Fav"} </button>
+                    style={styles.button}> 
+                    {loading ? "Checking..." : (isFav ? "Remove Fav" : "Add Fav")}
+                    </button>
                 </div>
             </div>
         </div>

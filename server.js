@@ -59,7 +59,7 @@ app.get('/api/businesses', (req, res) => {
 
 
 app.get('/api/favorites', (req, res) => {
-    res.json(favoriteIds);
+    res.json(favouriteIds);
 });
 
 app.post('/api/favorites/:id', (req, res) => {
@@ -70,8 +70,8 @@ app.post('/api/favorites/:id', (req, res) => {
         return res.status(404).json({ error: "Business not found" });
     }
 
-    if (!favoriteIds.includes(id)) {
-        favoriteIds.push(id);
+    if (!favouriteIds.includes(id)) {
+        favouriteIds.push(id);
     }
 
     res.status(200).json({ message: "Added to favorites", id, isFavourite: true });
@@ -81,7 +81,7 @@ app.post('/api/favorites/:id', (req, res) => {
 app.delete('/api/favorites/:id', (req, res) => {
     const id = parseInt(req.params.id);
     
-    favoriteIds = favoriteIds.filter(favId => favId !== id);
+    favouriteIds = favouriteIds.filter(favId => favId !== id);
 
     res.status(200).json({ message: "Removed from favorites", id, isFavourite: false });
 });
