@@ -12,7 +12,6 @@ function BusinessModal({ business, onClose }) {
 
     const handleToggle = async () => {
         setLoading(true);
-        // Call the centralized logic from context
         await toggleFavourite(business.id);
         setLoading(false);
     }

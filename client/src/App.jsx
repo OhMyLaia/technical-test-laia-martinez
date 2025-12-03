@@ -43,9 +43,6 @@ return (
   <div className="app-container">
     <header className="main-header">
       <div className="logo">Vuélvete Local</div>
-      <div>
-        <button style={styles.button}>Favs</button>
-      </div>
     </header>
 
     <SearchBar onSearch={fetchBusinesses} />
