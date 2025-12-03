@@ -1,35 +1,21 @@
 import { useState } from "react";
+import { useFavourites } from "../context/FavouritesContext";
 
 function BusinessModal({ business, onClose }) {
 
-    const [isFav, setIsFav] = useState(false);
-    const [loading, setLoading] = useState();
+    const [loading, setLoading] = useState(false);
+    // Destructure the function and state from the context
+    const { toggleFavourite, favourites } = useFavourites();
 
+    // Check if the current business ID exists in the context array
+    const isFav = favourites.includes(business.id);
 
-
-
-    const toggleFav = async () => {
-        const method = isFav ? 'DELETE' : 'POST';
+    const handleToggle = async () => {
         setLoading(true);
-        
-        try {
-            const response = await fetch(`http://localhost:3001/api/favorites/${business.id}`, {
-                method: method,
-                headers: { 'Content-Type': 'application/json' }
-            });
-
-            if (response.ok) {
-                setIsFav(!isFav);
-            }
-
-        } catch (error) {
-            console.error("Error adding favourite:", error);
-            setLoading(false);
-        }
+        // Call the centralized logic from context
+        await toggleFavourite(business.id);
         setLoading(false);
     }
-
-    
 
     const styles = {
         overlay: {
@@ -63,7 +49,7 @@ function BusinessModal({ business, onClose }) {
         },
         button: {
             padding: '10px 20px',
-            backgroundColor: isFav ? 'red' : '#007bff',
+            backgroundColor:  isFav ? 'red' : '#007bff',
             color: 'white',
             border: 'none',
             borderRadius: '5px',
@@ -71,6 +57,7 @@ function BusinessModal({ business, onClose }) {
             marginTop: '15px',
         }
     };
+
     return (
         <div style={styles.overlay} onClick={onClose}>
             <div style={styles.content} onClick={(e) => e.stopPropagation()}>
@@ -100,9 +87,11 @@ function BusinessModal({ business, onClose }) {
                 
                 <div>
                     <button
-                    onClick={toggleFav}
-                    style={styles.button}> 
-                    {loading ? "Checking..." : (isFav ? "Remove Fav" : "Add Fav")}
+                        onClick={handleToggle}
+                        disabled={loading}
+                        style={{...styles.button, opacity: loading ? 0.7 : 1}}
+                    > 
+                        {loading ? "Loading..." : (isFav ? "Delete Fav" : "Add Fav")}
                     </button>
                 </div>
             </div>

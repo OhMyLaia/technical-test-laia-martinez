@@ -6,6 +6,11 @@ const cors = require('cors');
 app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
 
+// to simulate latency and see the loading state!
+app.use((req, res, next) => {
+    setTimeout(next, 800);
+});
+
 // Mock Data for Businesses
 const businesses = [
     {
