@@ -114,6 +114,7 @@ Implementación de la funcionalidad básica de favoritos usando backend *in-memo
 * Si tuviera que usar CSS puro obligatoriamente, en vez de usar estilos en línea (como he hecho), los ordenaría en ficheros según el componente, enlazados por nombres y IDs.
 * Crearía un router con `react-router-dom`.
 * Refactorizaría todo el componente `<App />` para que no tuviera nada de lógica, conteniendo solo las `<AppRoutes />`.
+```
 
 # 🧩 4. UI shots:
 <img width="375" height="666" alt="Screenshot 2025-12-03 at 15 46 10" src="https://github.com/user-attachments/assets/8179e73e-4ddd-4ebf-850c-48892112e000" />
