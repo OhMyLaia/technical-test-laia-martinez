@@ -6,6 +6,8 @@ y he valorado el tiempo que tenia vs las posibilidades y he creado esta UI.
 De las que he visto, si tuviera que escoger una, sería esta. Es muy clean, se entiende perfectamente. La memoria colectiva reconoce el corazoncito
 para dar like --> los likes se guardan --> favorito. También podría usarse una estrellita, o un "Guardados".
 
+<img width="535" height="428" alt="Screenshot 2025-12-03 at 15 44 35" src="https://github.com/user-attachments/assets/42ca5555-6e8d-4ddd-bbd7-7fd17d81387d" />
+
 # 🧩 2. Diseño del Flujo de Datos
 
 ### ¿Cómo funcionaría el sistema de favoritos a nivel teórico?
@@ -112,3 +114,9 @@ Implementación de la funcionalidad básica de favoritos usando backend *in-memo
 * Si tuviera que usar CSS puro obligatoriamente, en vez de usar estilos en línea (como he hecho), los ordenaría en ficheros según el componente, enlazados por nombres y IDs.
 * Crearía un router con `react-router-dom`.
 * Refactorizaría todo el componente `<App />` para que no tuviera nada de lógica, conteniendo solo las `<AppRoutes />`.
+
+# 🧩 4. UI shots:
+<img width="375" height="666" alt="Screenshot 2025-12-03 at 15 46 10" src="https://github.com/user-attachments/assets/8179e73e-4ddd-4ebf-850c-48892112e000" />
+<img width="377" height="666" alt="Screenshot 2025-12-03 at 15 46 26" src="https://github.com/user-attachments/assets/a94ce79e-6af4-4daa-8a8c-638a0bd1f646" />
+<img width="376" height="666" alt="Screenshot 2025-12-03 at 15 46 41" src="https://github.com/user-attachments/assets/050cef2a-22d7-4703-b2f9-dd41c942842f" />
+
