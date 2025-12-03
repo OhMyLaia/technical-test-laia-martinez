@@ -27,27 +27,42 @@ function App() {
     fetchBusinesses();
   }, []);
 
-  return (
-    <div className="app-container">
-      <header className="main-header">
-        <div className="logo">Vuélvete Local</div>
-      </header>
+const styles = {
+  button: {
+    padding: '10px 20px',
+    backgroundColor: '#009bff',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    marginTop: '15px',
+  },
+};
 
-      <SearchBar onSearch={fetchBusinesses} />
+return (
+  <div className="app-container">
+    <header className="main-header">
+      <div className="logo">Vuélvete Local</div>
+      <div>
+        <button style={styles.button}>Favs</button>
+      </div>
+    </header>
 
-      <MapContainer
-        businesses={businesses}
-        onMarkerClick={setSelectedBusiness}
+    <SearchBar onSearch={fetchBusinesses} />
+
+    <MapContainer
+      businesses={businesses}
+      onMarkerClick={setSelectedBusiness}
+    />
+
+    {selectedBusiness && (
+      <BusinessModal
+        business={selectedBusiness}
+        onClose={() => setSelectedBusiness(null)}
       />
-
-      {selectedBusiness && (
-        <BusinessModal
-          business={selectedBusiness}
-          onClose={() => setSelectedBusiness(null)}
-        />
-      )}
-    </div>
-  )
+    )}
+  </div>
+)
 }
 
 export default App
