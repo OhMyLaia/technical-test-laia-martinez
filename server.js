@@ -84,7 +84,29 @@ app.post('/api/businesses', (req, res) => {
     }
 });
 
+app.delete('/api/businesses/:id', (req, res) => {
 
+    try {
+        const id = parseInt(req.params.id);
+
+        const index = businesses.findIndex(biz => biz.id === id);
+
+        if (index === -1) {
+            return res.status(404).json({ error: "Business not found" });
+        }
+
+        const deleteBusiness = businesses.splice(index, 1);
+
+        res.status(200).json({ 
+            message: "Business deleted successfully", 
+            deletedId: id 
+        });
+
+    } catch (error) {
+        console.error("Error deleting business:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 const PORT = 3001;
 app.listen(PORT, () => {
