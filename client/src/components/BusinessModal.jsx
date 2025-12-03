@@ -4,6 +4,7 @@ function BusinessModal({ business, onClose }) {
 
     const [isFav, setIsFav] = useState(false);
 
+
     const toggleFav = () => {
         setIsFav(prev => !prev);
     }

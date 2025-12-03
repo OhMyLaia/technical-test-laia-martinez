@@ -37,9 +37,14 @@ const businesses = [
     }
 ];
 
+let favouriteIds = [];
+
+
+
 // API Endpoint for Businesses
 app.get('/api/businesses', (req, res) => {
     const { search, category } = req.query;
+
     let results = businesses;
 
     if (search) {
@@ -52,60 +57,33 @@ app.get('/api/businesses', (req, res) => {
     res.json(results);
 });
 
-app.post('/api/businesses', (req, res) => {
 
-    try {
-
-        const { name, lat, lng, category, description, address } = req.body;
-
-        if (!name || !lat || !lng) {
-            return res.status(400).json({ error: "Mandatory key missing" });
-        }
-    
-        const newId = businesses.length > 0 ? businesses[businesses.length - 1].id + 1 : 1;
-    
-        const newBusiness = {
-            id: newId,
-            name,
-            lat,
-            lng,
-            category,
-            description,
-            address
-        };
-    
-        businesses.push(newBusiness);
-    
-        res.status(201).json(newBusiness);
-
-    } catch (error) {
-        console.error("Error creating business:", error);
-        res.status(500).json({ error: "Internal server error" });
-    }
+app.get('/api/favorites', (req, res) => {
+    res.json(favoriteIds);
 });
 
-app.delete('/api/businesses/:id', (req, res) => {
-
-    try {
-        const id = parseInt(req.params.id);
-
-        const index = businesses.findIndex(biz => biz.id === id);
-
-        if (index === -1) {
-            return res.status(404).json({ error: "Business not found" });
-        }
-
-        const deleteBusiness = businesses.splice(index, 1);
-
-        res.status(200).json({ 
-            message: "Business deleted successfully", 
-            deletedId: id 
-        });
-
-    } catch (error) {
-        console.error("Error deleting business:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+app.post('/api/favorites/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    
+    const businessExists = businesses.find(b => b.id === id);
+    if (!businessExists) {
+        return res.status(404).json({ error: "Business not found" });
     }
+
+    if (!favoriteIds.includes(id)) {
+        favoriteIds.push(id);
+    }
+
+    res.status(200).json({ message: "Added to favorites", id, isFavourite: true });
+});
+
+
+app.delete('/api/favorites/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    
+    favoriteIds = favoriteIds.filter(favId => favId !== id);
+
+    res.status(200).json({ message: "Removed from favorites", id, isFavourite: false });
 });
 
 const PORT = 3001;
